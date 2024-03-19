@@ -7,6 +7,12 @@
 
         <title>Ajout Produit</title>
     </head>
+    <header>
+        <nav>
+            <a href="index.php">Ajouter produit</a>
+            <a href="recap.php">Panier</a>
+        </nav>
+    </header>
     <body>
         
         <h1 class="display-1">Ajouter un produit</h1>
