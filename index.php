@@ -8,31 +8,33 @@
         <title>Ajout Produit</title>
     </head>
     <header>
-        <nav>
-            <a href="index.php">Ajouter produit</a>
-            <a href="recap.php">Panier</a>
+        <nav class="navbar bg-body-tertiary">
+            <form class="container-fluid justify-content-start">
+                <a href="index.php" class="btn btn-primary" type="button">Ajouter produit</a>
+                <a href="recap.php" class="btn btn-primary" type="button">Panier</a>
+            </form>
         </nav>
     </header>
     <body>
         
-        <h1 class="display-1">Ajouter un produit</h1>
+        <h1 class="display-5 text-primary fw-bold">Ajouter un produit</h1>
         <form action="traitement.php" method="post">
             <p>
                 <label>
                     Nom de produit : 
-                    <input type="text" name="name">
+                    <input type="text" name="name" class="input-group flex-nowrap">
                 </label>
             </p>
             <p>
                 <label>
-                    Prix du produit : 
-                    <input type="number" step="any" name="price">
+                    Prix du produit en € : 
+                    <input type="number" step="any" name="price" class="input-group flex-nowrap">
                 </label>
             </p>
             <p>
                 <label>
                     Quantité désirée : 
-                    <input type="text" name="qtt" value="1">
+                    <input type="text" name="qtt" value="1" class="input-group flex-nowrap">
                 </label>
             </p>
             <p>
@@ -43,3 +45,4 @@
 
     </body>
 </html>
+<a href=""></a>
