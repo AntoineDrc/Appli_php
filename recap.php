@@ -13,9 +13,11 @@
     <title>Récapitulatif des produits</title>
 </head>
 <header>
-    <nav>
-        <a href="index.php">Ajouter produit</a>
-        <a href="recap.php">Panier</a>
+    <nav class="navbar bg-body-tertiary">
+        <form class="container-fluid justify-content-start">
+            <a href="index.php" class="btn btn-primary me-2" type="button">Ajouter produit</a>
+            <a href="recap.php" class="btn btn-primary" type="button">Panier</a>
+        </form>
     </nav>
 </header>
 <body>
@@ -26,9 +28,10 @@
         echo "<p>Aucun produit en session...</p>";
     } else 
     {
-        echo "<table>",
+        echo "<table class='table table-striped'>",
                 "<thead>",
                     "<tr>",
+                        "<th></th>",
                         "<th></th>",
                         "<th></th>",
                         "<th></th>",
@@ -46,6 +49,7 @@
                     "<td>".number_format($product['price'], 2, ",", "&nbsp;")."&nbsp;€</td>",
                     "<td>".$product['qtt']."</td>",
                     "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
+                    "<td><a class='btn btn-danger' href=''>Supprimer</a></td>",
                 "</tr>";
             $totalGeneral += $product['total'];
         }

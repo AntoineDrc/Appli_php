@@ -10,8 +10,9 @@
     <header>
         <nav class="navbar bg-body-tertiary">
             <form class="container-fluid justify-content-start">
-                <a href="index.php" class="btn btn-primary" type="button">Ajouter produit</a>
+                <a href="index.php" class="btn btn-primary me-2" type="button">Ajouter produit</a>
                 <a href="recap.php" class="btn btn-primary" type="button">Panier</a>
+                
             </form>
         </nav>
     </header>
@@ -45,4 +46,4 @@
 
     </body>
 </html>
-<a href=""></a>
+
