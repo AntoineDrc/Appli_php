@@ -19,7 +19,7 @@
     <body>
         
         <h1 class="display-5 text-primary fw-bold">Ajouter un produit</h1>
-        <form action="traitement.php" method="post">
+        <form action="traitement.php?action=add" method="post">
             <p>
                 <label>
                     Nom de produit : 
