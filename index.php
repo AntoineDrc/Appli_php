@@ -50,7 +50,7 @@ include 'traitement.php';
         <?php  
             // Affichage du message lors de l'ajout d'un produit
             if (isset($_SESSION['message'])) {
-            echo "<p>{$_SESSION['message']}</p>";
+            echo "<p class='alert alert-success'>{$_SESSION['message']}</p>";
             unset($_SESSION['message']);
             } 
         ?>    

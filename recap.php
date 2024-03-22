@@ -75,13 +75,15 @@
     <!-- Bouton pour vider entièrement le panier -->
     <a class="btn btn-danger" href="traitement.php?action=vider">Vider le panier</a>
 
+    <div>
     <?php 
     // Affichage du message en cas de suppression d'un article 
     if (isset($_SESSION['message'])) {
-        echo "<p>{$_SESSION['message']}</p>";
+        echo "<div class='alert alert-danger mt-3'>{$_SESSION['message']}</div>";
         unset($_SESSION['message']);
         }
     ?>
+    </div>
 
 <!-- Script Bootstrap pour assurer le bon fonctionnement des composants interactifs -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
