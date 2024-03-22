@@ -36,8 +36,14 @@
                         // Ajoute le produit au tableau 'products' dans la session
                         $_SESSION['products'][] = $product;
                     }
+
+                        // Message en cas de réussite d'ajout du produit
+                        $_SESSION['message'] = "Produit ajouté avec succès !";
+                } else 
+                {
+                    $_SESSION['message'] = "Erreur lors de l'ajout du produit";
                 }
-                
+                            
                 // Redirige l'utilisateur vers la page principale pour éviter la soumission multiple du formulaire
                 header("Location:index.php");
                 break;
@@ -54,6 +60,8 @@
             case "supprimer":
                 // Supprime le produit spécifié par $id du tableau 'products'
                 unset($_SESSION['products'][$_GET['id']]);
+                // Message lors de la suppression
+                $_SESSION['message'] = "Le produit a été supprimé du panier !";
                 // Redirige et termine le script
                 header("Location:recap.php"); die;
                 break;
@@ -75,4 +83,17 @@
                 break;
         }       
     }
-?>
+
+    // Afficher le nombre de produits dans le panier 
+
+    // Initialisation de la variable total quantité
+    $totalQtt = 0;
+
+    // Boucler sur tout les produits de la session 
+    foreach($_SESSION['products'] as $product)
+    {
+        $totalQtt += $product['qtt'];
+    }
+
+    
+    ?>

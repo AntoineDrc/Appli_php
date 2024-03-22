@@ -1,3 +1,7 @@
+<?php 
+include 'traitement.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -11,7 +15,8 @@
         <nav class="navbar bg-body-tertiary">
             <form class="container-fluid justify-content-start">
                 <a href="index.php" class="btn btn-primary me-2" type="button">Ajouter produit</a>
-                <a href="recap.php" class="btn btn-primary" type="button">Panier</a>
+                <a href="recap.php" class="btn btn-primary position-relative" type="button">Panier
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $totalQtt; ?></span></a>
                 
             </form>
         </nav>
@@ -42,6 +47,14 @@
                 <input type="submit" name="submit" value="Ajouter le produit" class="btn btn-primary">
             </p>
         </form>
+        <?php  
+            // Affichage du message lors de l'ajout d'un produit
+            if (isset($_SESSION['message'])) {
+            echo "<p>{$_SESSION['message']}</p>";
+            unset($_SESSION['message']);
+            } 
+        ?>    
+        
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     </body>

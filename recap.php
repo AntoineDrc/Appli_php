@@ -1,6 +1,5 @@
 <?php 
-    // Démarre ou reprend une session existante
-    session_start();
+    include 'traitement.php';
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +17,8 @@
         <form class="container-fluid justify-content-start">
             <!-- Boutons pour naviguer entre les pages d'ajout de produit et de récapitulatif du panier -->
             <a href="index.php" class="btn btn-primary me-2" type="button">Ajouter produit</a>
-            <a href="recap.php" class="btn btn-primary" type="button">Panier</a>
+            <a href="recap.php" class="btn btn-primary position-relative" type="button">Panier
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $totalQtt; ?></span></a>
         </form>
     </nav>
 </header>
@@ -74,6 +74,14 @@
 
     <!-- Bouton pour vider entièrement le panier -->
     <a class="btn btn-danger" href="traitement.php?action=vider">Vider le panier</a>
+
+    <?php 
+    // Affichage du message en cas de suppression d'un article 
+    if (isset($_SESSION['message'])) {
+        echo "<p>{$_SESSION['message']}</p>";
+        unset($_SESSION['message']);
+        }
+    ?>
 
 <!-- Script Bootstrap pour assurer le bon fonctionnement des composants interactifs -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
