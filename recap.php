@@ -1,4 +1,5 @@
 <?php 
+
     include 'traitement.php';
     ob_start(); // Démarre la temporisation de sortie 
 
@@ -9,7 +10,7 @@ require_once "template.php";
 
 ?>
 <body>
-    <?php
+<?php
     
     // Vérifie si le tableau 'products' dans la session est défini et non vide
     if(!isset($_SESSION['products']) || empty($_SESSION['products']))
@@ -69,19 +70,19 @@ require_once "template.php";
             "</tbody>",
             "</table>";
     }
-    ?>
+?>
 
     <!-- Bouton pour vider entièrement le panier -->
     <a class="btn btn-danger" href="traitement.php?action=vider">Vider le panier</a>
 
     <div>
-    <?php 
+<?php 
     // Affichage du message en cas de suppression d'un article 
     if (isset($_SESSION['message'])) {
         echo "<div class='alert alert-danger mt-3'>{$_SESSION['message']}</div>";
         unset($_SESSION['message']);
         }
-    ?>
+?>
     </div>
 
 </body>

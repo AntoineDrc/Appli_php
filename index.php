@@ -3,13 +3,13 @@
 include 'traitement.php';
 ob_start();
 
-
-
     
     $content = ob_get_clean(); // Récupère le contenue capturé, le stock dans la variable content puis l'efface
     $pageTitle = "Ajout Produit"; // Définit le titre de la page pour utilisation dans le fichier
     require_once "template.php"; 
-    ?>
+
+?>
+
     <body>
         
         <h1 class="display-5 text-primary fw-bold">Ajouter un produit</h1>

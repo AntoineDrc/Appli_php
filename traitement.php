@@ -50,8 +50,6 @@
                     $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                     $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
-                    //  var_dump($_FILES);die;
-                    
                     // Vérifie si toutes les données du formulaire sont valides
                     if($name && $price && $qtt)
                     {
@@ -81,7 +79,9 @@
                 header("Location:index.php");
                 break;
 
-            // Cas pour vider entièrement le panier
+
+
+            // Cas pour vider entièrement le panier et TOUTES les photos dans le répertoire
             case "vider";
                 // Récupère tout les fichiers dans le repertoire
                 $photos = glob('./upload/*');
@@ -99,6 +99,8 @@
                 header("Location:recap.php"); die;
                 break;
 
+
+
             // Cas pour supprimer un produit spécifique du panier
             case "supprimer":
                 if(isset($_SESSION['products'][$_GET['id']]['image'])) 
@@ -109,6 +111,7 @@
                     if(file_exists($cheminFichier)) {
                         unlink($cheminFichier); // Supprime le fichier
                     }
+                }
                 // Supprime l'entrée du produit de la session après avoir supprimé l'image
                 unset($_SESSION['products'][$_GET['id']]);
                 // Message lors de la suppression
@@ -116,7 +119,9 @@
                 // Redirige et termine le script
                 header("Location:recap.php"); die;
                 break;
-                }
+
+
+
             // Cas pour augmenter la quantité d'un produit spécifique
             case "ajouter":
                 // Incrémente la quantité du produit spécifié par $id
@@ -125,6 +130,8 @@
                 header("Location:recap.php"); die;
                 break;
 
+
+                
             // Cas pour diminuer la quantité d'un produit spécifique
             case "retirer":
                 // Décrémente la quantité du produit spécifié par $id
