@@ -78,6 +78,9 @@
             case "retirer":
                 // Décrémente la quantité du produit spécifié par $id
                 $_SESSION['products'][$_GET['id']]['qtt']--;
+                // Empêcher une valeur négative 
+                if($_SESSION['products'][$_GET['id']]['qtt'] < 0)
+                $_SESSION['products'][$_GET['id']]['qtt'] = 0;
                 // Redirige et termine le script
                 header("Location:recap.php"); die;
                 break;

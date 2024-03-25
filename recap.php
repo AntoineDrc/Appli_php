@@ -1,5 +1,6 @@
 <?php 
     include 'traitement.php';
+    ob_start(); // Démarre la temporisation de sortie 
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +8,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Inclut les styles Bootstrap pour styliser la page -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Récapitulatif des produits</title>
 </head>
 <header>
-    <!-- Navigation avec Bootstrap pour un meilleur rendu visuel -->
     <nav class="navbar bg-body-tertiary">
         <form class="container-fluid justify-content-start">
             <!-- Boutons pour naviguer entre les pages d'ajout de produit et de récapitulatif du panier -->
@@ -22,6 +21,12 @@
         </form>
     </nav>
 </header>
+<?php 
+$content = ob_get_clean(); // Récupère le contenue capturé, le stock dans la variable content puis l'efface
+$pageTitle = "Récapitulatif des produits"; // Définit le titre de la page pour utilisation dans le fichier template 
+require_once "template.php";
+
+?>
 <body>
     <?php
     
