@@ -30,6 +30,7 @@
 
     }
    
+    
     // Vérifie si un ID a été envoyé via GET et le stocke dans $id, sinon $id est null
     $id = (isset($_GET["id"])) ? $_GET["id"] : null;
     
@@ -135,13 +136,9 @@
         {
             $totalQtt += $product['qtt'];
 
-            // Afficher l'image du produit s'il y en à une 
-            if(isset($product['image']))
-            {
-                $imageUrl = '.upload' . $product['image'];
-            }
         }
     }
 
     
     ?>
+

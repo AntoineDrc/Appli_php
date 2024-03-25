@@ -27,6 +27,7 @@ require_once "template.php";
                         "<th>Prix unitaire</th>",
                         "<th>Quantité</th>",
                         "<th colspan='3'>Actions</th>",
+                        "<th>Image</th>",
                     "</tr>",
                 "</thead>",
                 "<tbody>";
@@ -42,8 +43,20 @@ require_once "template.php";
                     // Boutons pour ajuster la quantité de chaque produit
                     "<td><a class='btn btn-outline-success' href='traitement.php?action=ajouter&id=$index'>+</a></td>",
                     "<td><a class='btn btn-outline-danger' href='traitement.php?action=retirer&id=$index'>-</a></td>",
-                    "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
+                    "<td>".number_format($product['total'], 2, ",", "&nbsp;")."&nbsp;€</td>";
+                    // Vérification et affichage de l'image du produit 
+                    if(isset($product['image']))
+                    {
+                        $imageUrl = './upload/' . $product['image'];
+                        echo 
+                        "<td><img src='$imageUrl' alt='image de l'article' style=width:100px></td>";
+                    } else 
+                    {
+                        echo 
+                        "Pas d'image disponible";
+                    }
                     // Bouton pour supprimer un produit du panier
+                    echo
                     "<td><a class='btn btn-danger' href='traitement.php?action=supprimer&id=$index'>Supprimer</a></td>",
                 "</tr>";
             $totalGeneral += $product['total'];
