@@ -82,7 +82,17 @@
                 break;
 
             // Cas pour vider entièrement le panier
-            case "vider":
+            case "vider";
+                // Récupère tout les fichiers dans le repertoire
+                $photos = glob('./upload/*');
+                // Parcourt et supprime les photos
+                foreach($photos as $photo)
+                {
+                    if(is_file($photo)) // Vérifie si l'élément est un fichier
+                    {
+                        unlink($photo); // Supprime le fichier 
+                    }
+                }
                 // Supprime le tableau 'products' de la session
                 unset($_SESSION['products']);
                 // Redirige vers la page de récapitulatif et termine le script
@@ -91,14 +101,22 @@
 
             // Cas pour supprimer un produit spécifique du panier
             case "supprimer":
-                // Supprime le produit spécifié par $id du tableau 'products'
+                if(isset($_SESSION['products'][$_GET['id']]['image'])) 
+                {
+                    // Construit le chemin complet vers le fichier image
+                    $cheminFichier = './upload/' . $_SESSION['products'][$_GET['id']]['image'];
+                    // Vérifie si le fichier existe avant de tenter de le supprimer
+                    if(file_exists($cheminFichier)) {
+                        unlink($cheminFichier); // Supprime le fichier
+                    }
+                // Supprime l'entrée du produit de la session après avoir supprimé l'image
                 unset($_SESSION['products'][$_GET['id']]);
                 // Message lors de la suppression
                 $_SESSION['message'] = "Le produit a été supprimé du panier !";
                 // Redirige et termine le script
                 header("Location:recap.php"); die;
                 break;
-
+                }
             // Cas pour augmenter la quantité d'un produit spécifique
             case "ajouter":
                 // Incrémente la quantité du produit spécifié par $id
