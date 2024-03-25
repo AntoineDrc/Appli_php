@@ -1,7 +1,35 @@
 <?php 
     // Démarre une nouvelle session ou reprend une session existante
     session_start();
-    
+
+    // Récupère les infos du fichier uploadé
+    if (isset($_FILES['file']))
+    {
+    $name = $_FILES['file']['name'];
+    $type = $_FILES['file']['type'];
+    $tmpName = $_FILES['file']['tmp_name'];
+    $error = $_FILES['file']['error'];
+    $size = $_FILES['file']['size'];
+
+    $tabExtension = explode('.', $name);
+    $extension = strtolower(end($tabExtension));
+
+    $extensionsAutorisees = ['jpg', 'jpeg', 'gif', 'png'];
+    $tailleMax = 400000;
+
+    if (in_array($extension, $extensionsAutorisees) && $size <= $tailleMax && $error == 0)
+    {   
+        $uniqueName = uniqid('', true);
+        $fileName = $uniqueName.'.'.$extension;
+
+        move_uploaded_file($tmpName, './upload/'.$fileName);
+    } else 
+    {
+        echo 'Mauvaise extension ou taille trop importante ou erreur présente';
+    }
+
+    }
+   
     // Vérifie si un ID a été envoyé via GET et le stocke dans $id, sinon $id est null
     $id = (isset($_GET["id"])) ? $_GET["id"] : null;
     
@@ -21,6 +49,8 @@
                     $price = filter_input(INPUT_POST, "price", FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
                     $qtt = filter_input(INPUT_POST, "qtt", FILTER_VALIDATE_INT);
 
+                    //  var_dump($_FILES);die;
+                    
                     // Vérifie si toutes les données du formulaire sont valides
                     if($name && $price && $qtt)
                     {
@@ -30,8 +60,10 @@
                             "name" => $name,
                             "price" => $price,
                             "qtt" => $qtt,
-                            "total" => $price*$qtt
+                            "total" => $price*$qtt,
+                            "image" => $fileName
                         ];
+
 
                         // Ajoute le produit au tableau 'products' dans la session
                         $_SESSION['products'][] = $product;
@@ -78,9 +110,15 @@
             case "retirer":
                 // Décrémente la quantité du produit spécifié par $id
                 $_SESSION['products'][$_GET['id']]['qtt']--;
-                // Empêcher une valeur négative 
-                if($_SESSION['products'][$_GET['id']]['qtt'] < 0)
-                $_SESSION['products'][$_GET['id']]['qtt'] = 0;
+                
+                // Supprime l'article si la quantité est inférieure à 0
+                if ($_SESSION['products'][$_GET['id']]['qtt'] < 1)
+                {
+                    // Supprime le produit spécifié par $id du tableau 'products'
+                    unset($_SESSION['products'][$_GET['id']]);
+                    // Message lors de la suppression
+                    $_SESSION['message'] = "Le produit a été supprimé du panier !";
+                }
                 // Redirige et termine le script
                 header("Location:recap.php"); die;
                 break;
@@ -91,11 +129,18 @@
 
     // Initialisation de la variable total quantité
     $totalQtt = 0;
+    if(isset($_SESSION["products"])) {
+        // Boucler sur tout les produits de la session 
+        foreach($_SESSION['products'] as $product)
+        {
+            $totalQtt += $product['qtt'];
 
-    // Boucler sur tout les produits de la session 
-    foreach($_SESSION['products'] as $product)
-    {
-        $totalQtt += $product['qtt'];
+            // Afficher l'image du produit s'il y en à une 
+            if(isset($product['image']))
+            {
+                $imageUrl = '.upload' . $product['image'];
+            }
+        }
     }
 
     
