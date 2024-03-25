@@ -2,27 +2,32 @@
     // Démarre une nouvelle session ou reprend une session existante
     session_start();
 
-    // Récupère les infos du fichier uploadé
-    if (isset($_FILES['file']))
-    {
-    $name = $_FILES['file']['name'];
-    $type = $_FILES['file']['type'];
-    $tmpName = $_FILES['file']['tmp_name'];
-    $error = $_FILES['file']['error'];
-    $size = $_FILES['file']['size'];
+    // Vérifie si un fichier a été téléchargé via le formulaire
+    if (isset($_FILES['file'])) {
 
+    // Récupère les informations du fichier téléchargé
+    $name = $_FILES['file']['name']; // Le nom original du fichier
+    $type = $_FILES['file']['type']; // Le type MIME du fichier
+    $tmpName = $_FILES['file']['tmp_name']; // L'emplacement temporaire du fichier
+    $error = $_FILES['file']['error']; // Le code d'erreur associé au téléchargement
+    $size = $_FILES['file']['size']; // La taille du fichier en octets
+
+    // Sépare le nom du fichier pour obtenir l'extension
     $tabExtension = explode('.', $name);
-    $extension = strtolower(end($tabExtension));
+    $extension = strtolower(end($tabExtension)); // Convertit l'extension en minuscules
 
+    // Définit les extensions de fichier autorisées et la taille maximale
     $extensionsAutorisees = ['jpg', 'jpeg', 'gif', 'png'];
-    $tailleMax = 400000;
+    $tailleMax = 400000; // Taille maximale autorisée (en octets)
 
-    if (in_array($extension, $extensionsAutorisees) && $size <= $tailleMax && $error == 0)
-    {   
-        $uniqueName = uniqid('', true);
-        $fileName = $uniqueName.'.'.$extension;
+    // Vérifie si l'extension du fichier est autorisée et si la taille du fichier est inférieure à la taille maximale
+    if (in_array($extension, $extensionsAutorisees) && $size <= $tailleMax && $error == 0) {
+        // Génère un nom unique pour le fichier pour éviter les conflits sur le serveur
+        $uniqueName = uniqid('', true); // Génère un identifiant unique
+        $fileName = $uniqueName . '.' . $extension; // Crée le nouveau nom de fichier avec l'extension
 
-        move_uploaded_file($tmpName, './upload/'.$fileName);
+        // Déplace le fichier du répertoire temporaire vers le répertoire de destination
+        move_uploaded_file($tmpName, './upload/' . $fileName);
     } else 
     {
         echo 'Mauvaise extension ou taille trop importante ou erreur présente';
