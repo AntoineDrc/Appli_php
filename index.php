@@ -2,15 +2,10 @@
 
 include 'traitement.php';
 ob_start();
-
     
-    $content = ob_get_clean(); // Récupère le contenue capturé, le stock dans la variable content puis l'efface
-    $pageTitle = "Ajout Produit"; // Définit le titre de la page pour utilisation dans le fichier
-    require_once "template.php"; 
 
 ?>
 
-    <body>
         
         <h1 class="display-5 text-primary fw-bold">Ajouter un produit</h1>
         <form action="traitement.php?action=add" method="post" enctype="multipart/form-data">
@@ -55,9 +50,12 @@ ob_start();
             echo "<p class='alert alert-success'>{$_SESSION['message']}</p>";
             unset($_SESSION['message']);
             } 
+
+    $content = ob_get_clean(); // Récupère le contenue capturé, le stock dans la variable content puis l'efface
+    $pageTitle = "Ajout Produit"; // Définit le titre de la page pour utilisation dans le fichier
+    require_once "template.php";
         ?>    
         
-    </body>
-</html>
+
 
 

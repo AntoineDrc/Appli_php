@@ -3,11 +3,6 @@
     include 'traitement.php';
     ob_start(); // Démarre la temporisation de sortie 
 
-
-$content = ob_get_clean(); // Récupère le contenue capturé, le stock dans la variable content puis l'efface
-$pageTitle = "Récapitulatif des produits"; // Définit le titre de la page pour utilisation dans le fichier template 
-require_once "template.php";
-
 ?>
 <body>
 <?php
@@ -82,8 +77,13 @@ require_once "template.php";
         echo "<div class='alert alert-danger mt-3'>{$_SESSION['message']}</div>";
         unset($_SESSION['message']);
         }
-?>
+        ?>
     </div>
+    <?php
+    $content = ob_get_clean(); // Récupère le contenue capturé, le stock dans la variable content puis l'efface
+    $pageTitle = "Récapitulatif des produits"; // Définit le titre de la page pour utilisation dans le fichier template 
+    require_once "template.php";
+    ?>
 
 </body>
 </html>
